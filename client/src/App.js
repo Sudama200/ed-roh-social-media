@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 
 function App() {
   const mode = useSelector((state) => state.mode);
+  console.log("🚀 ~ file: App.js:13 ~ App ~ mode:", mode)
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
   return (
     <BrowserRouter>
