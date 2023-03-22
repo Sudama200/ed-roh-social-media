@@ -66,7 +66,7 @@ const Form = () => {
     for (let value in values) {
       formData.append(value, values[value]);
     }
-    formData.append("picturePath", values.picture.name);
+    formData.append("picturePath", values.picture);
     const savedUserResponse = await fetch(
       "http://localhost:3001/auth/register",
       {
@@ -76,7 +76,7 @@ const Form = () => {
     );
     const savedUser = await savedUserResponse.json();
     console.log("🚀 ~ file: Form.js:70 ~ register ~ savedUser:", savedUser);
-    // onSubmitProps.resetForm()
+    onSubmitProps.resetForm()
 
     if (savedUser) {
       setpageType("login");
@@ -92,7 +92,7 @@ const Form = () => {
 
     const loggedIn = await loggedInResponse.json();
     console.log("🚀 ~ file: Form.js:92 ~ login ~ loggedIn:", loggedIn);
-    // onSubmitProps.resetForm()
+    onSubmitProps.resetForm()
 
     if(loggedIn){
       dispatch(
