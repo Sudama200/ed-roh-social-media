@@ -12,7 +12,8 @@
     name: "auth",
     initialState,
     reducers: {
-        setMode: (state) => {
+        setMode: (state, action) => {
+            console.log('hello');
             state.mode = state.mode === "dark" ? "light" : "dark";
         },
 
@@ -23,6 +24,7 @@
         },
 
         setLogout: (state, action) => {
+            console.log("hehngnbf")
             state.user = null;
             state.token = null;
         },

@@ -75,7 +75,7 @@ const Navbar = () => {
 
       {isNonMobileScreens ? (
         <FlexBetween gap="2rem">
-          <IconButton onClick={() => dispatch(setMode)}>
+          <IconButton onClick={() => {dispatch(setMode())}}>
             {theme.palette.mode === "dark" ? (
               <DarkMode sx={{ fontSize: "25px" }} />
             ) : (
@@ -146,7 +146,7 @@ const Navbar = () => {
             alignItems="center"
             gap="3rem"
           >
-            <IconButton onClick={() => dispatch(setMode)}>
+            <IconButton onClick={() => dispatch(setMode())}>
               {theme.palette.mode === "dark" ? (
                 <DarkMode sx={{ fontSize: "25px" }} />
               ) : (

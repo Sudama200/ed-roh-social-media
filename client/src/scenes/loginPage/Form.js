@@ -59,33 +59,28 @@ const Form = () => {
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
 
-  useEffect(() => {
-    const hello = fetch("http://localhost:3001/auth/register")
-    .then((response) => response.json())
-    .then(resp => console.log(resp))
-  }, [])
 
   const register = async (values, onSubmitProps) => {
-    console.log("🚀 ~ file: Form.js:60 ~ register ~ values:", values)
-    // const formData = new FormData();
-    // for (let value in values) {
-    //   formData.append(value, values[value]);
-    // }
-    // formData.append("picturePath", values.picture.name);
-    // const savedUserResponse = await fetch(
-    //   "http://localhost:3001/auth/register",
-    //   {
-    //     method: "POST",
-    //     body: formData,
-    //   }
-    // );
-    // const savedUser = await savedUserResponse.json();
-    // console.log("🚀 ~ file: Form.js:70 ~ register ~ savedUser:", savedUser);
+    // this allows us to send form info with image
+    const formData = new FormData();
+    for (let value in values) {
+      formData.append(value, values[value]);
+    }
+    formData.append("picturePath", values.picture.name);
+    const savedUserResponse = await fetch(
+      "http://localhost:3001/auth/register",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+    const savedUser = await savedUserResponse.json();
+    console.log("🚀 ~ file: Form.js:70 ~ register ~ savedUser:", savedUser);
     // onSubmitProps.resetForm()
 
-    // if (savedUser) {
-    //   setpageType("login");
-    // }
+    if (savedUser) {
+      setpageType("login");
+    }
   };
 
   const login = async (values, onSubmitProps) => {
@@ -111,7 +106,7 @@ const Form = () => {
   };
 
   const handleFormSubmit = async (values, onSubmitProps) => {
-    // if(isLogin) await login(values, onSubmitProps);
+    if(isLogin) await login(values, onSubmitProps);
     if (isRegister) await register(values, onSubmitProps);
   };
 
@@ -140,7 +135,7 @@ const Form = () => {
               "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
             }}
           >
-            {!isRegister && (
+            {isRegister && (
               <>
                 <TextField
                   label="First Name"
